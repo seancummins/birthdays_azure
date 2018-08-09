@@ -56,11 +56,15 @@ def calculate_days_till_next(original_date):
     now = datetime.datetime.now()
     delta1 = datetime.datetime(now.year, original_date.month, original_date.day) - now
     delta2 = datetime.datetime(now.year+1, original_date.month, original_date.day) - now
-    #days = max(delta1, delta2).total_seconds() / 60 /60 /24
-    if delta1.days <= 0:
-        return delta2.days+1
+    #return max(delta1, delta2).total_seconds() / 60 /60 /24
+    #if delta1.days <= 0:
+    #    return delta2.days+1
+    #else:
+    #    return delta1.days+1
+    if delta2.days < 364:
+        return delta2.days
     else:
-        return delta1.days+1
+        return delta1.days
 
 # Generate/format txt and html pretty tables
 pt_bdays = prettytable.PrettyTable(["DaysTillNextBirthDay", "Name", "CurrentAge", "BirthDate", "DeathDate"])
@@ -190,4 +194,4 @@ if dayofweek == 6 or birthdays_today == True or anniv_today == True:
     else:
         subject = mail_subject
 
-    mail(mail_sender,mail_receiver,subject,text,html)
+    #mail(mail_sender,mail_receiver,subject,text,html)
